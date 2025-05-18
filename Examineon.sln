@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examineon", "Examineon\Examineon.csproj", "{AFD04160-7687-43D5-A91B-7E95218763CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineonTests", "ExamineonTests\ExamineonTests.csproj", "{C4133A0A-1624-4199-8BB7-7BB48023A5FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFD04160-7687-43D5-A91B-7E95218763CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD04160-7687-43D5-A91B-7E95218763CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD04160-7687-43D5-A91B-7E95218763CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD04160-7687-43D5-A91B-7E95218763CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0268C4F-E58B-4B5C-AE16-23E95AAA2C4C}
+	EndGlobalSection
+EndGlobal
