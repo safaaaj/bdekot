@@ -5,7 +5,13 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examineon", "Examineon\Examineon.csproj", "{AFD04160-7687-43D5-A91B-7E95218763CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineonTests", "ExamineonTests\ExamineonTests.csproj", "{C4133A0A-1624-4199-8BB7-7BB48023A5FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineonTests1", "ExamineonTests1\ExamineonTests1.csproj", "{D6FAD0C8-3413-4E43-B1E9-F37A22456540}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		Examineon\Program.cs = Examineon\Program.cs
+		Examineon\bin\Debug\net8.0-windows\USERS.xlsx = Examineon\bin\Debug\net8.0-windows\USERS.xlsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +23,10 @@ Global
 		{AFD04160-7687-43D5-A91B-7E95218763CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFD04160-7687-43D5-A91B-7E95218763CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFD04160-7687-43D5-A91B-7E95218763CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4133A0A-1624-4199-8BB7-7BB48023A5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FAD0C8-3413-4E43-B1E9-F37A22456540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FAD0C8-3413-4E43-B1E9-F37A22456540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FAD0C8-3413-4E43-B1E9-F37A22456540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FAD0C8-3413-4E43-B1E9-F37A22456540}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
