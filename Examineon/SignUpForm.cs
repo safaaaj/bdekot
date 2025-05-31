@@ -76,7 +76,7 @@ namespace Examineon
 
             // === SAVE TO EXCEL ===
 
-            var file = new FileInfo("USERS.xlsx");
+            var file = new FileInfo("DATABASE.xlsx");
             bool fileExists = file.Exists;
 
             using (var package = new ExcelPackage(file))
@@ -110,11 +110,11 @@ namespace Examineon
                 ws.Cells[newRow, 5].Value = role;
 
                 package.Save();
-                
+
             }
 
-           
-           MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             this.Hide();
@@ -129,6 +129,14 @@ namespace Examineon
                 SecondaryForm secondary = new SecondaryForm();
                 secondary.Show();
             }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            WelocmePage welcome = new WelocmePage();
+            welcome.Show();
+            this.Hide();
 
         }
     }

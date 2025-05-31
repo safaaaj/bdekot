@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.0.5" />
+    <PackageReference Include="ScottPlot.WinForms" Version="5.0.55" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.10.0" />
   </ItemGroup>
 
 </Project>

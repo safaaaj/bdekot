@@ -37,6 +37,7 @@
             label4 = new Label();
             textBox2 = new TextBox();
             button1 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -113,15 +114,25 @@
             button1.TabIndex = 8;
             button1.Text = "LOG IN";
             button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-
+            button1.Click += button1_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(39, 1109);
+            button3.Name = "button3";
+            button3.Size = new Size(88, 43);
+            button3.TabIndex = 9;
+            button3.Text = "<--";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(960, 982);
+            ClientSize = new Size(960, 1191);
+            Controls.Add(button3);
             Controls.Add(button1);
             Controls.Add(textBox2);
             Controls.Add(label4);
@@ -148,5 +159,6 @@
         private Label label4;
         private TextBox textBox2;
         private Button button1;
+        private Button button3;
     }
 }

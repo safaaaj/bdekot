@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OfficeOpenXml;
 using System.IO;
 
+
 namespace Examineon
 {
     public partial class LoginForm : Form
@@ -48,7 +49,7 @@ namespace Examineon
                 return;
             }
 
-            var file = new FileInfo("USERS.xlsx");
+            var file = new FileInfo("DATABASE.xlsx");
             if (!file.Exists)
             {
                 MessageBox.Show("User database not found.");
@@ -80,15 +81,15 @@ namespace Examineon
             {
                 MessageBox.Show($"Welcome {username}! You are logged in as a {selectedRole}.");
 
-                
+
                 if (selectedRole == "lecturer")
                 {
-                    MainForm main = new MainForm(selectedRole); 
+                    MainForm main = new MainForm(selectedRole);
                     main.Show();
                 }
                 else if (selectedRole == "student")
                 {
-                    SecondaryForm secondary = new SecondaryForm(selectedRole); 
+                    SecondaryForm secondary = new SecondaryForm(selectedRole);
                     secondary.Show();
                 }
 
@@ -99,5 +100,12 @@ namespace Examineon
                 MessageBox.Show("Invalid username, password, or role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            WelocmePage welcome = new WelocmePage();
+            welcome.Show();
+            this.Hide();
+        }
+
     }
 }

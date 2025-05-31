@@ -41,6 +41,7 @@
             button1 = new Button();
             label6 = new Label();
             comboBox1 = new ComboBox();
+            button3 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -52,7 +53,6 @@
             label1.Size = new Size(720, 128);
             label1.TabIndex = 0;
             label1.Text = "Create Accout !";
-            
             // 
             // label2
             // 
@@ -141,7 +141,6 @@
             label6.Size = new Size(83, 37);
             label6.TabIndex = 11;
             label6.Text = "Role ";
-            
             // 
             // comboBox1
             // 
@@ -152,11 +151,21 @@
             comboBox1.Size = new Size(393, 40);
             comboBox1.TabIndex = 12;
             // 
+            // button3
+            // 
+            button3.Location = new Point(50, 1042);
+            button3.Name = "button3";
+            button3.Size = new Size(76, 43);
+            button3.TabIndex = 13;
+            button3.Text = "<--";
+            button3.UseVisualStyleBackColor = true;
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(960, 982);
+            ClientSize = new Size(1015, 1117);
+            Controls.Add(button3);
             Controls.Add(comboBox1);
             Controls.Add(label6);
             Controls.Add(button1);
@@ -190,5 +199,6 @@
         private Button button1;
         private Label label6;
         private ComboBox comboBox1;
+        private Button button3;
     }
 }
