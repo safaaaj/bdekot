@@ -6,6 +6,8 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Button btnViewScores;
+
 
         /// <summary>
         /// Clean up any resources being used.
@@ -29,46 +31,65 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecondaryForm));
-            button2 = new Button();
+            btnPracticeExam = new Button();
             button1 = new Button();
             SuspendLayout();
             // 
-            // button2
+            // btnPracticeExam
             // 
-            button2.Location = new Point(202, 880);
-            button2.Name = "button2";
-            button2.Size = new Size(88, 43);
-            button2.TabIndex = 6;
-            button2.Text = "-->";
-            button2.UseVisualStyleBackColor = true;
-           // button2.Click += button2_Click;
+            btnPracticeExam.Location = new Point(60, 568);
+            btnPracticeExam.Name = "btnPracticeExam";
+            btnPracticeExam.Size = new Size(237, 68);
+            btnPracticeExam.TabIndex = 0;
+            btnPracticeExam.Text = "Practice form";
+            btnPracticeExam.UseVisualStyleBackColor = true;
+            btnPracticeExam.Click += btnPracticeExam_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(108, 880);
+            button1.Location = new Point(60, 455);
             button1.Name = "button1";
-            button1.Size = new Size(88, 43);
-            button1.TabIndex = 5;
-            button1.Text = "<--";
+            button1.Size = new Size(237, 68);
+            button1.TabIndex = 1;
+            button1.Text = "Exam form";
             button1.UseVisualStyleBackColor = true;
-         //   button1.Click += button1_Click;
+            button1.Click += button1_Click;
             // 
             // SecondaryForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1463, 999);
-            Controls.Add(button2);
+            ClientSize = new Size(1006, 797);
             Controls.Add(button1);
+            Controls.Add(btnPracticeExam);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SecondaryForm";
             Text = "SecondaryForm";
+            Load += SecondaryForm_Load;
             ResumeLayout(false);
+
+            this.btnViewScores = new System.Windows.Forms.Button();
+
+            // 
+            // btnViewScores
+            // 
+            this.btnViewScores.Location = new System.Drawing.Point(50, 300); // adjust position as needed
+            this.btnViewScores.Name = "btnViewScores";
+            this.btnViewScores.Size = new System.Drawing.Size(200, 50);
+            this.btnViewScores.Text = "View My Scores";
+            this.btnViewScores.UseVisualStyleBackColor = true;
+            this.btnViewScores.Click += new System.EventHandler(this.btnViewScores_Click);
+
+            // Add to form
+            this.Controls.Add(this.btnViewScores);
+
         }
 
         #endregion
 
-        private Button button2;
+        private Button btnPracticeExam;
         private Button button1;
+
+
     }
 }

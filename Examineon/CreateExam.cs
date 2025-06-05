@@ -1,5 +1,4 @@
-﻿// ✅ FULL UPDATED BACKEND FOR CREATEEXAM FORM
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +12,7 @@ namespace Examineon
     {
         private List<Question> availableQuestions = new List<Question>();
         private List<string> existingExamQuestions = new List<string>();
+        private List<string> loadedExamIds = new List<string>();
 
         public CreateExam()
         {
@@ -57,12 +57,12 @@ namespace Examineon
             dgvAvailableQuestions.DataSource = null;
             dgvAvailableQuestions.DataSource = availableQuestions;
         }
+
         private void CreateExam_Load(object sender, EventArgs e)
         {
-           
             CompareQuestionsWithExams();
+            LoadFullExamQuestions(); // ✅ Added
         }
-
 
         private void LoadExistingExams()
         {
@@ -97,14 +97,12 @@ namespace Examineon
 
             if (chkRandomTopics.Checked)
             {
-                // ✅ Random topics, but still filter by difficulty
                 filteredQuestions = availableQuestions
                     .Where(q => string.IsNullOrEmpty(selectedDifficulty) || q.Difficulty == selectedDifficulty)
                     .ToList();
             }
             else
             {
-                // ✅ Filter by both category and difficulty
                 filteredQuestions = availableQuestions
                     .Where(q =>
                         (selectedCategories.Count == 0 || selectedCategories.Contains(q.Category)) &&
@@ -124,15 +122,14 @@ namespace Examineon
             }
 
             var selectedQuestions = filteredQuestions
-                .OrderBy(q => Guid.NewGuid()) // shuffle
+                .OrderBy(q => Guid.NewGuid())
                 .Take(requestedCount)
                 .ToList();
 
-            // Save to database
             SaveExamToDatabase(selectedQuestions);
             LoadExistingExams();
+            LoadFullExamQuestions(); // ✅ Added
             DisplayExamInGrid(selectedQuestions);
-
         }
 
         private void DisplayExamInGrid(List<Question> questions)
@@ -157,8 +154,6 @@ namespace Examineon
             dgvExams.Columns["AnswerC"].HeaderText = "C";
             dgvExams.Columns["AnswerD"].HeaderText = "D";
         }
-
-
 
         private void SaveExamToDatabase(List<Question> selectedQuestions)
         {
@@ -194,7 +189,6 @@ namespace Examineon
                 {
                     var q = selectedQuestions[i];
 
-                    // Only put ExamID, CreatedAt, NumberOfQuestions in the first row
                     ws.Cells[rowStart, 1].Value = (i == 0) ? examId : "";
                     ws.Cells[rowStart, 2].Value = (i == 0) ? createdAt : "";
                     ws.Cells[rowStart, 3].Value = (i == 0) ? numberOfQuestions : "";
@@ -218,6 +212,115 @@ namespace Examineon
             MessageBox.Show($"Exam saved with {selectedQuestions.Count} questions!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void LoadFullExamQuestions()
+        {
+            var file = new FileInfo("DATABASE.xlsx");
+            var fullExamData = new List<dynamic>();
+            var examQuestionCounter = new Dictionary<string, int>();
+
+            using (var package = new ExcelPackage(file))
+            {
+                var ws = package.Workbook.Worksheets["Exam"];
+                if (ws == null || ws.Dimension == null)
+                    return;
+
+                int rowCount = ws.Dimension.End.Row;
+
+                string currentExamId = "";
+                string createdAt = "";
+                int questionCount = 0;
+
+                for (int row = 2; row <= rowCount; row++)
+                {
+                    string examId = ws.Cells[row, 1].Text;
+                    string date = ws.Cells[row, 2].Text;
+
+                    if (!string.IsNullOrWhiteSpace(examId))
+                    {
+                        currentExamId = examId;
+                        createdAt = date;
+                        questionCount = int.TryParse(ws.Cells[row, 3].Text, out int parsed) ? parsed : 0;
+                    }
+
+                    fullExamData.Add(new
+                    {
+                        ExamID = currentExamId,
+                        CreatedAt = createdAt,
+                        QuestionCount = questionCount,
+                        Question = ws.Cells[row, 4].Text,
+                        A = ws.Cells[row, 5].Text,
+                        B = ws.Cells[row, 6].Text,
+                        C = ws.Cells[row, 7].Text,
+                        D = ws.Cells[row, 8].Text,
+                        Correct = ws.Cells[row, 9].Text,
+                        Category = ws.Cells[row, 10].Text,
+                        Difficulty = ws.Cells[row, 11].Text,
+                        Type = ws.Cells[row, 12].Text
+                    });
+                }
+            }
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = fullExamData;
+
+            dataGridView1.Columns["ExamID"].HeaderText = "Exam ID";
+            dataGridView1.Columns["CreatedAt"].HeaderText = "Created At";
+            dataGridView1.Columns["QuestionCount"].HeaderText = "# of Questions";
+            dataGridView1.Columns["Question"].HeaderText = "Question Text";
+            dataGridView1.Columns["Correct"].HeaderText = "Correct Answer";
+        }
+
+
+        private void btnDeleteExam_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Please select an exam to delete.");
+                return;
+            }
+
+            string selectedExamId = dataGridView1.CurrentRow.Cells["ExamID"].Value.ToString();
+            if (string.IsNullOrEmpty(selectedExamId))
+            {
+                MessageBox.Show("Invalid Exam ID.");
+                return;
+            }
+
+            var confirm = MessageBox.Show($"Are you sure you want to delete exam {selectedExamId}?",
+                                          "Confirm Delete", MessageBoxButtons.YesNo);
+            if (confirm != DialogResult.Yes) return;
+
+            var file = new FileInfo("DATABASE.xlsx");
+
+            using (var package = new ExcelPackage(file))
+            {
+                var ws = package.Workbook.Worksheets["Exam"];
+                if (ws == null || ws.Dimension == null) return;
+
+                int row = 2;
+                while (row <= ws.Dimension.End.Row)
+                {
+                    string examId = ws.Cells[row, 1].Text;
+
+                    if (examId == selectedExamId)
+                    {
+                        ws.DeleteRow(row);
+                        // don't increment row since the next one shifts up
+                    }
+                    else
+                    {
+                        row++;
+                    }
+                }
+
+                package.Save();
+            }
+
+            MessageBox.Show($"✅ Exam {selectedExamId} deleted successfully!");
+            LoadFullExamQuestions(); // refresh grid
+        }
+
+
 
         private void CompareQuestionsWithExams()
         {
@@ -235,12 +338,14 @@ namespace Examineon
                 MessageBox.Show("No duplicate questions found.", "Check Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             MainForm mainForm = new MainForm("lecturer");
             mainForm.Show();
             this.Hide();
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             Form1 createQuestion = new Form1();
@@ -259,6 +364,11 @@ namespace Examineon
             public string Category { get; set; }
             public string Difficulty { get; set; }
             public string Type { get; set; }
+        }
+
+        private void CreateExam_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

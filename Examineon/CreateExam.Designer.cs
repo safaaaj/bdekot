@@ -31,9 +31,11 @@
             btnDeleteExam = new Button();
             button2 = new Button();
             button1 = new Button();
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)nudNumQuestions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAvailableQuestions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvExams).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // chkRandomTopics
@@ -136,7 +138,7 @@
             dgvExams.RowHeadersWidth = 62;
             dgvExams.RowTemplate.Height = 28;
             dgvExams.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvExams.Size = new Size(1000, 736);
+            dgvExams.Size = new Size(1000, 256);
             dgvExams.TabIndex = 31;
             // 
             // btnDeleteExam
@@ -147,10 +149,11 @@
             btnDeleteExam.TabIndex = 30;
             btnDeleteExam.Text = "Delete Selected Exam";
             btnDeleteExam.UseVisualStyleBackColor = true;
+            btnDeleteExam.Click += btnDeleteExam_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(173, 860);
+            button2.Location = new Point(193, 1096);
             button2.Name = "button2";
             button2.Size = new Size(88, 43);
             button2.TabIndex = 33;
@@ -160,7 +163,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(79, 860);
+            button1.Location = new Point(83, 1096);
             button1.Name = "button1";
             button1.Size = new Size(88, 43);
             button1.TabIndex = 32;
@@ -168,11 +171,21 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(862, 818);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 82;
+            dataGridView1.Size = new Size(1000, 378);
+            dataGridView1.TabIndex = 34;
+            // 
             // CreateExam
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2052, 1250);
+            Controls.Add(dataGridView1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(chkRandomTopics);
@@ -189,10 +202,11 @@
             Controls.Add(dgvExams);
             Name = "CreateExam";
             Text = "Create Exam";
-            Load += CreateExam_Load;
+            Load += CreateExam_Load_1;
             ((System.ComponentModel.ISupportInitialize)nudNumQuestions).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAvailableQuestions).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvExams).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -213,5 +227,6 @@
         private System.Windows.Forms.DataGridView dgvExams;
         private Button button2;
         private Button button1;
+        private DataGridView dataGridView1;
     }
 }

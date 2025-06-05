@@ -53,19 +53,20 @@ namespace Examineon
                 return;
             }
 
-            // ID: required
-            if (string.IsNullOrEmpty(id))
+            // ID: must be exactly 9 digits
+            if (id.Length != 9 || !id.All(char.IsDigit))
             {
-                MessageBox.Show("Please enter an ID.", "Missing ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("ID must be exactly 9 digits and numeric only.", "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Email: basic format check
-            if (!email.Contains("@") || !email.Contains(".") || email.StartsWith("@") || email.EndsWith("@"))
+            // Email: must end with @gmail.com
+            if (!email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Please enter a valid email address.", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email must be a valid Gmail address (e.g. example@gmail.com).", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
 
             // Role: required
             if (string.IsNullOrEmpty(role))
@@ -101,7 +102,14 @@ namespace Examineon
                         MessageBox.Show("Username already exists. Please choose another.", "Duplicate Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+
+                    if (ws.Cells[row, 3].Text.Trim() == id)
+                    {
+                        MessageBox.Show("This ID is already registered. Please use a different ID.", "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
+
 
                 ws.Cells[newRow, 1].Value = username;
                 ws.Cells[newRow, 2].Value = password;
@@ -126,10 +134,9 @@ namespace Examineon
             }
             else if (role == "student")
             {
-                SecondaryForm secondary = new SecondaryForm();
+                SecondaryForm secondary = new SecondaryForm(role, id);
                 secondary.Show();
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)

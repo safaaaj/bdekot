@@ -46,15 +46,17 @@
             rbB = new RadioButton();
             rbC = new RadioButton();
             rbD = new RadioButton();
-            button2 = new Button();
-            button1 = new Button();
+            btnEdit = new Button();
+            btnDelete = new Button();
+            lstQuestions = new ListBox();
+            btnExit = new Button();
             SuspendLayout();
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(224, 469);
+            btnAdd.Location = new Point(34, 289);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(257, 102);
+            btnAdd.Size = new Size(200, 102);
             btnAdd.TabIndex = 0;
             btnAdd.Text = "add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -62,9 +64,9 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(532, 469);
+            btnClear.Location = new Point(34, 408);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(257, 102);
+            btnClear.Size = new Size(200, 102);
             btnClear.TabIndex = 1;
             btnClear.Text = "clear";
             btnClear.UseVisualStyleBackColor = true;
@@ -72,9 +74,9 @@
             // 
             // btnDisplay
             // 
-            btnDisplay.Location = new Point(818, 469);
+            btnDisplay.Location = new Point(271, 290);
             btnDisplay.Name = "btnDisplay";
-            btnDisplay.Size = new Size(257, 102);
+            btnDisplay.Size = new Size(200, 102);
             btnDisplay.TabIndex = 2;
             btnDisplay.Text = "display";
             btnDisplay.UseVisualStyleBackColor = true;
@@ -222,33 +224,54 @@
             rbD.UseVisualStyleBackColor = true;
             rbD.CheckedChanged += rbD_CheckedChanged;
             // 
-            // button2
+            // btnEdit
             // 
-            button2.Location = new Point(287, 878);
-            button2.Name = "button2";
-            button2.Size = new Size(88, 43);
-            button2.TabIndex = 19;
-            button2.Text = "-->";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnEdit.Location = new Point(271, 411);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(200, 99);
+            btnEdit.TabIndex = 18;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
-            // button1
+            // btnDelete
             // 
-            button1.Location = new Point(193, 878);
-            button1.Name = "button1";
-            button1.Size = new Size(88, 43);
-            button1.TabIndex = 18;
-            button1.Text = "<--";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnDelete.Location = new Point(113, 516);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(268, 99);
+            btnDelete.TabIndex = 19;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // lstQuestions
+            // 
+            lstQuestions.FormattingEnabled = true;
+            lstQuestions.Location = new Point(623, 471);
+            lstQuestions.Name = "lstQuestions";
+            lstQuestions.Size = new Size(702, 228);
+            lstQuestions.TabIndex = 20;
+            lstQuestions.SelectedIndexChanged += lstQuestions_SelectedIndexChanged;
+            // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(1349, 69);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(142, 82);
+            btnExit.TabIndex = 21;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1597, 1015);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnExit);
+            Controls.Add(lstQuestions);
+            Controls.Add(btnDelete);
+            Controls.Add(btnEdit);
             Controls.Add(rbD);
             Controls.Add(rbC);
             Controls.Add(rbB);
@@ -272,12 +295,7 @@
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
-
-
-
-
         }
-
 
         #endregion
 
@@ -299,7 +317,12 @@
         private RadioButton rbB;
         private RadioButton rbC;
         private RadioButton rbD;
-        private Button button2;
+        private Button btnEdit;
+        private Button btnDelete;
+        private ListBox lstQuestions;
+        private Button btnExit;
         private Button button1;
+        private Button button2;
+
     }
 }

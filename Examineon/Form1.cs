@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -9,8 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OfficeOpenXml;
 using System.IO;
-using System.Drawing.Imaging;
-using System.Security.Cryptography;
 
 
 namespace Examineon
@@ -19,13 +16,18 @@ namespace Examineon
     {
         private List<Question> questions = new List<Question>();
 
+        [Obsolete]
         public Form1()
         {
             InitializeComponent();
             btnAdd.Click += btnAdd_Click;
             btnClear.Click += btnClear_Click;
             btnDisplay.Click += btnDisplay_Click;
-            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            btnEdit.Click += btnEdit_Click;
+            btnDelete.Click += btnDelete_Click;
+            btnExit.Click += btnExit_Click;
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
 
         }
 
@@ -33,73 +35,43 @@ namespace Examineon
         {
             var file = new FileInfo("DATABASE.xlsx");
 
+
             using (var package = new ExcelPackage(file))
             {
-                ExcelWorksheet ws = package.Workbook.Worksheets.FirstOrDefault(w => w.Name == "Questions");
-
-                if (ws == null)
+                var sheet = package.Workbook.Worksheets.FirstOrDefault(ws => ws.Name == "Questions");
+                if (sheet == null)
                 {
-                    ws = package.Workbook.Worksheets.Add("Questions");
+                    sheet = package.Workbook.Worksheets.Add("Questions");
 
-                    ws.Cells[1, 1].Value = "QuestionText";
-                    ws.Cells[1, 2].Value = "AnswerA";
-                    ws.Cells[1, 3].Value = "AnswerB";
-                    ws.Cells[1, 4].Value = "AnswerC";
-                    ws.Cells[1, 5].Value = "AnswerD";
-                    ws.Cells[1, 6].Value = "CorrectAnswer";
-                    ws.Cells[1, 7].Value = "Category";
-                    ws.Cells[1, 8].Value = "Difficulty";
-                    ws.Cells[1, 9].Value = "Type";
+                    sheet.Cells[1, 1].Value = "QuestionText";
+                    sheet.Cells[1, 2].Value = "AnswerA";
+                    sheet.Cells[1, 3].Value = "AnswerB";
+                    sheet.Cells[1, 4].Value = "AnswerC";
+                    sheet.Cells[1, 5].Value = "AnswerD";
+                    sheet.Cells[1, 6].Value = "CorrectAnswer";
+                    sheet.Cells[1, 7].Value = "Category";
+                    sheet.Cells[1, 8].Value = "Difficulty";
+                    sheet.Cells[1, 9].Value = "Type";
 
-                    ws.Row(1).Style.Font.Bold = true;
+                    sheet.Row(1).Style.Font.Bold = true;
                 }
 
-                int newRow = ws.Dimension?.End.Row + 1 ?? 2;
+                int newRow = sheet.Dimension?.End.Row + 1 ?? 2;
 
-                ws.Cells[newRow, 1].Value = q.QuestionText;
-                ws.Cells[newRow, 2].Value = q.AnswerA;
-                ws.Cells[newRow, 3].Value = q.AnswerB;
-                ws.Cells[newRow, 4].Value = q.AnswerC;
-                ws.Cells[newRow, 5].Value = q.AnswerD;
-                ws.Cells[newRow, 6].Value = q.CorrectAnswer;
-                ws.Cells[newRow, 7].Value = q.Category;
-                ws.Cells[newRow, 8].Value = q.Difficulty;
-                ws.Cells[newRow, 9].Value = q.Type;
+                sheet.Cells[newRow, 1].Value = q.QuestionText;
+                sheet.Cells[newRow, 2].Value = q.AnswerA;
+                sheet.Cells[newRow, 3].Value = q.AnswerB;
+                sheet.Cells[newRow, 4].Value = q.AnswerC;
+                sheet.Cells[newRow, 5].Value = q.AnswerD;
+                sheet.Cells[newRow, 6].Value = q.CorrectAnswer;
+                sheet.Cells[newRow, 7].Value = q.Category;
+                sheet.Cells[newRow, 8].Value = q.Difficulty;
+                sheet.Cells[newRow, 9].Value = q.Type;
 
                 package.Save();
             }
 
-            MessageBox.Show("Question saved successfully!", "Saved", MessageBoxButtons.OK);
-        }
-        public static List<Question> LoadQuestionsFromDatabase()
-        {
-            var questions = new List<Question>();
-            var file = new FileInfo("DATABASE.xlsx");
-
-            using (var package = new ExcelPackage(file))
-            {
-                var ws = package.Workbook.Worksheets.FirstOrDefault(w => w.Name == "Questions");
-                if (ws == null) return questions;
-
-                int rowCount = ws.Dimension.End.Row;
-                for (int row = 2; row <= rowCount; row++)
-                {
-                    questions.Add(new Question
-                    {
-                        QuestionText = ws.Cells[row, 1].Text,
-                        AnswerA = ws.Cells[row, 2].Text,
-                        AnswerB = ws.Cells[row, 3].Text,
-                        AnswerC = ws.Cells[row, 4].Text,
-                        AnswerD = ws.Cells[row, 5].Text,
-                        CorrectAnswer = ws.Cells[row, 6].Text,
-                        Category = ws.Cells[row, 7].Text,
-                        Difficulty = ws.Cells[row, 8].Text,
-                        Type = ws.Cells[row, 9].Text
-                    });
-                }
-            }
-
-            return questions;
+            MessageBox.Show("Question saved successfully!");
         }
 
 
@@ -132,44 +104,63 @@ namespace Examineon
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+
+            string questionType = cmbType.SelectedItem?.ToString().ToLower();
+
             if (string.IsNullOrWhiteSpace(txtQuestion.Text) ||
                 string.IsNullOrWhiteSpace(txtAnswerA.Text) ||
-                string.IsNullOrWhiteSpace(txtAnswerB.Text) ||
-                string.IsNullOrWhiteSpace(txtAnswerC.Text) ||
-                string.IsNullOrWhiteSpace(txtAnswerD.Text))
+                string.IsNullOrWhiteSpace(txtAnswerB.Text))
+            {
+                MessageBox.Show("Please fill in all question and answer fields.");
+                return;
+            }
+            if (lstQuestions.Items.Contains(txtQuestion.Text.Trim()))
+            {
+                MessageBox.Show("This question already exists in the list!");
+                return;
+            }
+
+
+            if (questionType != "true/false" && (string.IsNullOrWhiteSpace(txtAnswerC.Text) || string.IsNullOrWhiteSpace(txtAnswerD.Text)))
             {
                 MessageBox.Show("Please fill in all question and answer fields.");
                 return;
             }
 
+            // Get the correct answer
             string correctAnswer = "";
             if (rbA.Checked) correctAnswer = "A";
             else if (rbB.Checked) correctAnswer = "B";
-            else if (rbC.Checked) correctAnswer = "C";
-            else if (rbD.Checked) correctAnswer = "D";
+            else if (rbC.Checked && questionType != "true/false") correctAnswer = "C";
+            else if (rbD.Checked && questionType != "true/false") correctAnswer = "D";
             else
             {
                 MessageBox.Show("Please select the correct answer.");
                 return;
             }
 
+            // Create the question
             Question q = new Question
             {
-                QuestionText = txtQuestion.Text,
-                AnswerA = txtAnswerA.Text,
-                AnswerB = txtAnswerB.Text,
-                AnswerC = txtAnswerC.Text,
-                AnswerD = txtAnswerD.Text,
-                CorrectAnswer = correctAnswer,
-                Category = cmbCategory.Text,
-                Difficulty = cmbDifficulty.Text,
-                Type = cmbType.Text
+                QuestionText = txtQuestion.Text.Trim(),
+                AnswerA = txtAnswerA.Text.Trim(),
+                AnswerB = txtAnswerB.Text.Trim(),
+                AnswerC = (questionType != "true/false") ? txtAnswerC.Text.Trim() : "",
+                AnswerD = (questionType != "true/false") ? txtAnswerD.Text.Trim() : "",
+                CorrectAnswer = correctAnswer.Trim(),
+                Category = cmbCategory.Text.Trim(),
+                Difficulty = cmbDifficulty.Text.Trim(),
+                Type = cmbType.Text.Trim()
             };
-            SaveQuestionToExcel(q);
+
             questions.Add(q);
+            SaveQuestionToExcel(q);  // 📝 Save to Excel!
+            MessageBox.Show("Question added successfully!");
 
             ClearForm();
         }
+
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -178,23 +169,32 @@ namespace Examineon
 
         private void btnDisplay_Click(object sender, EventArgs e)
         {
-            if (questions.Count == 0)
+            lstQuestions.Items.Clear();
+
+            var file = new FileInfo("DATABASE.xlsx");
+            if (!file.Exists)
             {
-                MessageBox.Show("No questions have been added yet.");
+                MessageBox.Show("No data found.");
                 return;
             }
 
-            string output = "";
-            foreach (var q in questions)
+            using (var package = new ExcelPackage(file))
             {
-                output += $"Question: {q.QuestionText}\n" +
-                          $"A: {q.AnswerA}\nB: {q.AnswerB}\nC: {q.AnswerC}\nD: {q.AnswerD}\n" +
-                          $"Correct: {q.CorrectAnswer}\n" +
-                          $"Type: {q.Type}, Category: {q.Category}, Difficulty: {q.Difficulty}\n\n";
-            }
+                var sheet = package.Workbook.Worksheets["Questions"];
+                if (sheet == null || sheet.Dimension == null)
+                {
+                    MessageBox.Show("No data found.");
+                    return;
+                }
 
-            MessageBox.Show(output, "Questions List");
+                for (int row = 2; row <= sheet.Dimension.End.Row; row++)
+                {
+                    lstQuestions.Items.Add(sheet.Cells[row, 1].Text); // QuestionText
+                }
+            }
         }
+
+
 
         private void ClearForm()
         {
@@ -209,7 +209,46 @@ namespace Examineon
             cmbDifficulty.SelectedIndex = 0;
         }
 
-        private void cmbType_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            string selectedType = cmbType.SelectedItem.ToString().ToLower();
+
+            if (selectedType == "true/false")
+            {
+                // Auto-fill True/False answers
+                txtAnswerA.Text = "True";
+                txtAnswerB.Text = "False";
+                txtAnswerA.ReadOnly = true;
+                txtAnswerB.ReadOnly = true;
+
+                // Disable C and D
+                txtAnswerC.Text = "";
+                txtAnswerD.Text = "";
+                txtAnswerC.Enabled = false;
+                txtAnswerD.Enabled = false;
+
+                // Disable C and D radio buttons
+                rbC.Enabled = false;
+                rbD.Enabled = false;
+            }
+            else
+            {
+                // Enable all fields
+                txtAnswerA.Text = "";
+                txtAnswerB.Text = "";
+                txtAnswerA.ReadOnly = false;
+                txtAnswerB.ReadOnly = false;
+
+                txtAnswerC.Enabled = true;
+                txtAnswerD.Enabled = true;
+
+                rbC.Enabled = true;
+                rbD.Enabled = true;
+            }
+        }
+
+
         private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cmbDifficulty_SelectedIndexChanged(object sender, EventArgs e) { }
         private void txtQuestion_TextChanged(object sender, EventArgs e) { }
@@ -236,6 +275,162 @@ namespace Examineon
             public string Type { get; set; }
         }
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (lstQuestions.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a question from the list to edit.");
+                return;
+            }
+
+            string selectedQuestion = lstQuestions.SelectedItem.ToString();
+            var file = new FileInfo("DATABASE.xlsx");
+
+            if (!file.Exists)
+            {
+                MessageBox.Show("Excel file not found.");
+                return;
+            }
+
+            using (var package = new ExcelPackage(file))
+            {
+                var sheet = package.Workbook.Worksheets["Questions"];
+                if (sheet == null)
+                {
+                    MessageBox.Show("No questions found in Excel.");
+                    return;
+                }
+
+                bool found = false;
+                for (int row = 2; row <= sheet.Dimension.End.Row; row++)
+                {
+                    string existingQuestion = sheet.Cells[row, 1].Text.Trim();
+                    if (existingQuestion.Equals(selectedQuestion, StringComparison.OrdinalIgnoreCase))
+                    {
+                        sheet.Cells[row, 1].Value = txtQuestion.Text;
+                        sheet.Cells[row, 2].Value = txtAnswerA.Text;
+                        sheet.Cells[row, 3].Value = txtAnswerB.Text;
+                        sheet.Cells[row, 4].Value = txtAnswerC.Text;
+                        sheet.Cells[row, 5].Value = txtAnswerD.Text;
+                        sheet.Cells[row, 6].Value = (rbA.Checked ? "A" : rbB.Checked ? "B" : rbC.Checked ? "C" : rbD.Checked ? "D" : "");
+                        sheet.Cells[row, 7].Value = cmbCategory.Text;
+                        sheet.Cells[row, 8].Value = cmbDifficulty.Text;
+                        sheet.Cells[row, 9].Value = cmbType.Text;
+
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    package.Save();
+
+                    // Update ListBox text
+                    int index = lstQuestions.SelectedIndex;
+                    lstQuestions.Items[index] = txtQuestion.Text;
+
+                    MessageBox.Show("✅ Question updated successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("❌ Question not found in Excel.");
+                }
+            }
+        }
+
+
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstQuestions.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a question from the list to delete.");
+                return;
+            }
+
+            string selectedQuestion = lstQuestions.SelectedItem.ToString();
+            var file = new FileInfo("DATABASE.xlsx");
+
+            if (!file.Exists)
+            {
+                MessageBox.Show("Excel file not found.");
+                return;
+            }
+
+            using (var package = new ExcelPackage(file))
+            {
+                var sheet = package.Workbook.Worksheets["Questions"];
+                if (sheet == null || sheet.Dimension == null)
+                {
+                    MessageBox.Show("No questions found in Excel.");
+                    return;
+                }
+
+                bool found = false;
+                for (int row = 2; row <= sheet.Dimension.End.Row; row++)
+                {
+                    if (sheet.Cells[row, 1].Text.Trim().Equals(selectedQuestion, StringComparison.OrdinalIgnoreCase))
+                    {
+                        sheet.DeleteRow(row);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    package.Save();
+                    lstQuestions.Items.Remove(selectedQuestion); // Remove from the ListBox
+                    ClearForm(); // Clear form fields
+                    MessageBox.Show("✅ Question deleted successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("❌ Question not found in Excel.");
+                }
+            }
+        }
+
+
+
+        private void lstQuestions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstQuestions.SelectedItem == null) return;
+
+            string selectedQuestion = lstQuestions.SelectedItem.ToString();
+            var file = new FileInfo("DATABASE.xlsx");
+
+            using (var package = new ExcelPackage(file))
+            {
+                var sheet = package.Workbook.Worksheets["Questions"];
+                if (sheet == null) return;
+
+                for (int row = 2; row <= sheet.Dimension.End.Row; row++)
+                {
+                    if (sheet.Cells[row, 1].Text.Trim().Equals(selectedQuestion, StringComparison.OrdinalIgnoreCase))
+                    {
+                        txtQuestion.Text = sheet.Cells[row, 1].Text;
+                        txtAnswerA.Text = sheet.Cells[row, 2].Text;
+                        txtAnswerB.Text = sheet.Cells[row, 3].Text;
+                        txtAnswerC.Text = sheet.Cells[row, 4].Text;
+                        txtAnswerD.Text = sheet.Cells[row, 5].Text;
+
+                        string correct = sheet.Cells[row, 6].Text.Trim();
+                        rbA.Checked = correct == "A";
+                        rbB.Checked = correct == "B";
+                        rbC.Checked = correct == "C";
+                        rbD.Checked = correct == "D";
+
+                        cmbCategory.Text = sheet.Cells[row, 7].Text;
+                        cmbDifficulty.Text = sheet.Cells[row, 8].Text;
+                        cmbType.Text = sheet.Cells[row, 9].Text;
+
+                        break;
+                    }
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             MainForm mainForm = new MainForm();
@@ -243,11 +438,17 @@ namespace Examineon
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+          //  LecturerAnalysisForm analysisForm = new LecturerAnalysisForm();
+            //analysisForm.Show();
+            //this.Hide();
+  //      }
+
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            LecturerAnalysisForm analysisForm = new LecturerAnalysisForm();
-            analysisForm.Show();
-            this.Hide();
+            Application.Exit();
         }
     }
+
 }
