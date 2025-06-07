@@ -46,6 +46,28 @@ namespace Examineon
             StudentScoresForm scoresForm = new StudentScoresForm(studentId);
             scoresForm.Show();
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Where do you want to go?\nYes = Login\nNo = Sign Up",
+                "Choose Destination",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.Show();
+                this.Hide(); this.Close();
+            }
+            else if (result == DialogResult.No)
+            {
+                SignUpForm signUpForm = new SignUpForm();
+                signUpForm.Show();
+                this.Hide();
+                // If Cancel, do nothing
+            }
+        }
 
 
 

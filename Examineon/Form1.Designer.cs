@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btnAdd = new Button();
             btnClear = new Button();
             btnDisplay = new Button();
@@ -50,69 +51,90 @@
             btnDelete = new Button();
             lstQuestions = new ListBox();
             btnExit = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(34, 289);
+            btnAdd.BackColor = Color.DarkSeaGreen;
+            btnAdd.Font = new Font("Segoe UI Variable Display", 10.875F, FontStyle.Bold);
+            btnAdd.ForeColor = Color.DarkSlateGray;
+            btnAdd.Location = new Point(63, 542);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(200, 102);
+            btnAdd.Size = new Size(222, 102);
             btnAdd.TabIndex = 0;
-            btnAdd.Text = "add";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Text = "➕ Add Question";
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(34, 408);
+            btnClear.BackColor = Color.DarkSeaGreen;
+            btnClear.Font = new Font("Segoe UI Variable Display", 10.875F, FontStyle.Bold);
+            btnClear.ForeColor = Color.DarkSlateGray;
+            btnClear.Location = new Point(63, 727);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(200, 102);
+            btnClear.Size = new Size(211, 102);
             btnClear.TabIndex = 1;
-            btnClear.Text = "clear";
-            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Text = "\U0001f9f9 Clear";
+            btnClear.UseVisualStyleBackColor = false;
             btnClear.Click += btnClear_Click;
             // 
             // btnDisplay
             // 
-            btnDisplay.Location = new Point(271, 290);
+            btnDisplay.BackColor = Color.DarkSeaGreen;
+            btnDisplay.Font = new Font("Segoe UI Variable Display", 10.875F, FontStyle.Bold);
+            btnDisplay.ForeColor = Color.DarkSlateGray;
+            btnDisplay.Location = new Point(367, 542);
             btnDisplay.Name = "btnDisplay";
             btnDisplay.Size = new Size(200, 102);
             btnDisplay.TabIndex = 2;
-            btnDisplay.Text = "display";
-            btnDisplay.UseVisualStyleBackColor = true;
+            btnDisplay.Text = "📋Display";
+            btnDisplay.UseVisualStyleBackColor = false;
             btnDisplay.Click += btnDisplay_Click;
             // 
             // QType
             // 
             QType.AutoSize = true;
-            QType.Location = new Point(34, 92);
+            QType.BackColor = Color.Transparent;
+            QType.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            QType.ForeColor = Color.DarkSlateGray;
+            QType.Location = new Point(63, 265);
             QType.Name = "QType";
-            QType.Size = new Size(169, 32);
+            QType.Size = new Size(289, 45);
             QType.TabIndex = 3;
-            QType.Text = "Question Type";
+            QType.Text = "📘 Question Type";
             // 
             // QCategory
             // 
             QCategory.AutoSize = true;
-            QCategory.Location = new Point(34, 144);
+            QCategory.BackColor = Color.Transparent;
+            QCategory.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            QCategory.ForeColor = Color.DarkSlateGray;
+            QCategory.Location = new Point(63, 343);
             QCategory.Name = "QCategory";
-            QCategory.Size = new Size(214, 32);
+            QCategory.Size = new Size(354, 45);
             QCategory.TabIndex = 4;
-            QCategory.Text = "Question Category";
+            QCategory.Text = "📂 Question Category";
             // 
             // QDifficulty
             // 
             QDifficulty.AutoSize = true;
-            QDifficulty.Location = new Point(34, 211);
+            QDifficulty.BackColor = Color.Transparent;
+            QDifficulty.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            QDifficulty.ForeColor = Color.DarkSlateGray;
+            QDifficulty.Location = new Point(63, 419);
             QDifficulty.Name = "QDifficulty";
-            QDifficulty.Size = new Size(214, 32);
+            QDifficulty.Size = new Size(339, 45);
             QDifficulty.TabIndex = 5;
-            QDifficulty.Text = "Question Difficulty";
+            QDifficulty.Text = "⭐ Question Difficulty";
             // 
             // cmbCategory
             // 
             cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(254, 144);
+            cmbCategory.Location = new Point(423, 350);
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(242, 40);
             cmbCategory.TabIndex = 6;
@@ -121,7 +143,7 @@
             // cmbType
             // 
             cmbType.FormattingEnabled = true;
-            cmbType.Location = new Point(254, 89);
+            cmbType.Location = new Point(367, 272);
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(242, 40);
             cmbType.TabIndex = 7;
@@ -130,7 +152,7 @@
             // cmbDifficulty
             // 
             cmbDifficulty.FormattingEnabled = true;
-            cmbDifficulty.Location = new Point(254, 203);
+            cmbDifficulty.Location = new Point(408, 419);
             cmbDifficulty.Name = "cmbDifficulty";
             cmbDifficulty.Size = new Size(242, 40);
             cmbDifficulty.TabIndex = 8;
@@ -138,136 +160,208 @@
             // 
             // txtQuestion
             // 
-            txtQuestion.Location = new Point(747, 107);
+            txtQuestion.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold | FontStyle.Italic);
+            txtQuestion.Location = new Point(1120, 218);
             txtQuestion.Name = "txtQuestion";
-            txtQuestion.Size = new Size(200, 39);
+            txtQuestion.Size = new Size(200, 46);
             txtQuestion.TabIndex = 9;
             txtQuestion.TextChanged += txtQuestion_TextChanged;
             // 
             // txtAnswerA
             // 
-            txtAnswerA.Location = new Point(747, 174);
+            txtAnswerA.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold | FontStyle.Italic);
+            txtAnswerA.Location = new Point(973, 293);
             txtAnswerA.Name = "txtAnswerA";
-            txtAnswerA.Size = new Size(200, 39);
+            txtAnswerA.Size = new Size(200, 46);
             txtAnswerA.TabIndex = 10;
             txtAnswerA.TextChanged += txtAnswerA_TextChanged;
             // 
             // txtAnswerB
             // 
-            txtAnswerB.Location = new Point(747, 241);
+            txtAnswerB.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold | FontStyle.Italic);
+            txtAnswerB.Location = new Point(973, 368);
             txtAnswerB.Name = "txtAnswerB";
-            txtAnswerB.Size = new Size(200, 39);
+            txtAnswerB.Size = new Size(200, 46);
             txtAnswerB.TabIndex = 11;
             txtAnswerB.TextChanged += txtAnswerB_TextChanged;
             // 
             // txtAnswerC
             // 
-            txtAnswerC.Location = new Point(747, 308);
+            txtAnswerC.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold | FontStyle.Italic);
+            txtAnswerC.Location = new Point(973, 451);
             txtAnswerC.Name = "txtAnswerC";
-            txtAnswerC.Size = new Size(200, 39);
+            txtAnswerC.Size = new Size(200, 46);
             txtAnswerC.TabIndex = 12;
             txtAnswerC.TextChanged += txtAnswerC_TextChanged;
             // 
             // txtAnswerD
             // 
-            txtAnswerD.Location = new Point(747, 380);
+            txtAnswerD.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold | FontStyle.Italic);
+            txtAnswerD.Location = new Point(973, 527);
             txtAnswerD.Name = "txtAnswerD";
-            txtAnswerD.Size = new Size(200, 39);
+            txtAnswerD.Size = new Size(200, 46);
             txtAnswerD.TabIndex = 13;
             txtAnswerD.TextChanged += txtAnswerD_TextChanged;
             // 
             // rbA
             // 
             rbA.AutoSize = true;
-            rbA.Location = new Point(1002, 174);
+            rbA.BackColor = Color.Transparent;
+            rbA.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            rbA.ForeColor = Color.DarkSlateGray;
+            rbA.Location = new Point(1221, 290);
             rbA.Name = "rbA";
-            rbA.Size = new Size(184, 36);
+            rbA.Size = new Size(251, 49);
             rbA.TabIndex = 14;
             rbA.TabStop = true;
             rbA.Text = "radioButton1";
-            rbA.UseVisualStyleBackColor = true;
+            rbA.UseVisualStyleBackColor = false;
             rbA.CheckedChanged += rbA_CheckedChanged;
             // 
             // rbB
             // 
             rbB.AutoSize = true;
-            rbB.Location = new Point(1002, 241);
+            rbB.BackColor = Color.Transparent;
+            rbB.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            rbB.ForeColor = Color.DarkSlateGray;
+            rbB.Location = new Point(1221, 365);
             rbB.Name = "rbB";
-            rbB.Size = new Size(184, 36);
+            rbB.Size = new Size(251, 49);
             rbB.TabIndex = 15;
             rbB.TabStop = true;
             rbB.Text = "radioButton2";
-            rbB.UseVisualStyleBackColor = true;
+            rbB.UseVisualStyleBackColor = false;
             rbB.CheckedChanged += rbB_CheckedChanged;
             // 
             // rbC
             // 
             rbC.AutoSize = true;
-            rbC.Location = new Point(1002, 308);
+            rbC.BackColor = Color.Transparent;
+            rbC.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            rbC.ForeColor = Color.DarkSlateGray;
+            rbC.Location = new Point(1221, 448);
             rbC.Name = "rbC";
-            rbC.Size = new Size(184, 36);
+            rbC.Size = new Size(251, 49);
             rbC.TabIndex = 16;
             rbC.TabStop = true;
             rbC.Text = "radioButton3";
-            rbC.UseVisualStyleBackColor = true;
+            rbC.UseVisualStyleBackColor = false;
             rbC.CheckedChanged += rbC_CheckedChanged;
             // 
             // rbD
             // 
             rbD.AutoSize = true;
-            rbD.Location = new Point(1002, 383);
+            rbD.BackColor = Color.Transparent;
+            rbD.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            rbD.ForeColor = Color.DarkSlateGray;
+            rbD.Location = new Point(1221, 524);
             rbD.Name = "rbD";
-            rbD.Size = new Size(184, 36);
+            rbD.Size = new Size(251, 49);
             rbD.TabIndex = 17;
             rbD.TabStop = true;
             rbD.Text = "radioButton4";
-            rbD.UseVisualStyleBackColor = true;
+            rbD.UseVisualStyleBackColor = false;
             rbD.CheckedChanged += rbD_CheckedChanged;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(271, 411);
+            btnEdit.BackColor = Color.DarkSeaGreen;
+            btnEdit.Font = new Font("Segoe UI Variable Display", 10.875F, FontStyle.Bold);
+            btnEdit.ForeColor = Color.DarkSlateGray;
+            btnEdit.Location = new Point(367, 727);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(200, 99);
             btnEdit.TabIndex = 18;
-            btnEdit.Text = "Edit";
-            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Text = "✏️Edit";
+            btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(113, 516);
+            btnDelete.BackColor = Color.Red;
+            btnDelete.Font = new Font("Segoe UI Variable Display", 10.875F, FontStyle.Bold);
+            btnDelete.ForeColor = Color.DarkSlateGray;
+            btnDelete.Location = new Point(173, 894);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(268, 99);
             btnDelete.TabIndex = 19;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Text = "🗑️Delete";
+            btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
             // lstQuestions
             // 
+            lstQuestions.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lstQuestions.ForeColor = Color.DarkSlateGray;
             lstQuestions.FormattingEnabled = true;
-            lstQuestions.Location = new Point(623, 471);
+            lstQuestions.ItemHeight = 40;
+            lstQuestions.Location = new Point(688, 628);
             lstQuestions.Name = "lstQuestions";
-            lstQuestions.Size = new Size(702, 228);
+            lstQuestions.Size = new Size(659, 524);
             lstQuestions.TabIndex = 20;
             lstQuestions.SelectedIndexChanged += lstQuestions_SelectedIndexChanged;
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(1349, 69);
+            btnExit.BackColor = Color.DarkSeaGreen;
+            btnExit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnExit.ForeColor = Color.DarkSlateGray;
+            btnExit.Location = new Point(1422, 1094);
             btnExit.Name = "btnExit";
-            btnExit.Size = new Size(142, 82);
+            btnExit.Size = new Size(158, 82);
             btnExit.TabIndex = 21;
-            btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Text = "❌ Exit";
+            btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.DarkSlateGray;
+            label1.Location = new Point(1068, 159);
+            label1.Name = "label1";
+            label1.Size = new Size(289, 45);
+            label1.TabIndex = 22;
+            label1.Text = "🌱 Question Text ";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Variable Display", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.DarkSlateGray;
+            label2.Location = new Point(423, 86);
+            label2.Name = "label2";
+            label2.Size = new Size(609, 85);
+            label2.TabIndex = 23;
+            label2.Text = "CREAT QUESTIONS";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.Black;
+            button1.Location = new Point(91, 1094);
+            button1.Margin = new Padding(5, 6, 5, 6);
+            button1.Name = "button1";
+            button1.Size = new Size(119, 71);
+            button1.TabIndex = 24;
+            button1.Text = "←";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1597, 1015);
+            BackgroundImage = Properties.Resources.greno1;
+            ClientSize = new Size(1608, 1206);
+            Controls.Add(button1);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(btnExit);
             Controls.Add(lstQuestions);
             Controls.Add(btnDelete);
@@ -290,11 +384,14 @@
             Controls.Add(btnDisplay);
             Controls.Add(btnClear);
             Controls.Add(btnAdd);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
+
+
         }
 
         #endregion
@@ -322,7 +419,7 @@
         private ListBox lstQuestions;
         private Button btnExit;
         private Button button1;
-        private Button button2;
-
+        private Label label1;
+        private Label label2;
     }
 }

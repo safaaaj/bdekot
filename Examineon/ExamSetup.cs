@@ -11,7 +11,7 @@ namespace Examineon
 {
     public partial class ExamSetup : Form
     {
-        private string studentId;
+        private string studentId; private string role;
 
         public ExamSetup(string studentId)
         {
@@ -82,6 +82,14 @@ namespace Examineon
             }
 
             return null;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            SecondaryForm secondaryForm = new SecondaryForm(role, studentId);
+            secondaryForm.Show();
+            this.Show();
+            this.Hide();
         }
     }
 }

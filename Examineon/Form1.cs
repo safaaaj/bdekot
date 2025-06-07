@@ -20,7 +20,7 @@ namespace Examineon
         public Form1()
         {
             InitializeComponent();
-            btnAdd.Click += btnAdd_Click;
+           
             btnClear.Click += btnClear_Click;
             btnDisplay.Click += btnDisplay_Click;
             btnEdit.Click += btnEdit_Click;
@@ -82,9 +82,7 @@ namespace Examineon
             {
                 "Multiple Choice",
                 "True/False",
-                "Fill-in-the-Blank",
-                "Multiple Answers",
-                "Short Answer"
+                
             });
 
             cmbCategory.Items.AddRange(new string[]
@@ -104,61 +102,59 @@ namespace Examineon
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
             string questionType = cmbType.SelectedItem?.ToString().ToLower();
+            bool isTrueFalse = questionType == "true/false";
 
+            
             if (string.IsNullOrWhiteSpace(txtQuestion.Text) ||
                 string.IsNullOrWhiteSpace(txtAnswerA.Text) ||
-                string.IsNullOrWhiteSpace(txtAnswerB.Text))
+                string.IsNullOrWhiteSpace(txtAnswerB.Text) ||
+                (!isTrueFalse &&
+                    (string.IsNullOrWhiteSpace(txtAnswerC.Text) || string.IsNullOrWhiteSpace(txtAnswerD.Text))))
             {
                 MessageBox.Show("Please fill in all question and answer fields.");
                 return;
             }
+
+          
             if (lstQuestions.Items.Contains(txtQuestion.Text.Trim()))
             {
                 MessageBox.Show("This question already exists in the list!");
                 return;
             }
 
-
-            if (questionType != "true/false" && (string.IsNullOrWhiteSpace(txtAnswerC.Text) || string.IsNullOrWhiteSpace(txtAnswerD.Text)))
-            {
-                MessageBox.Show("Please fill in all question and answer fields.");
-                return;
-            }
-
-            // Get the correct answer
+            
             string correctAnswer = "";
             if (rbA.Checked) correctAnswer = "A";
             else if (rbB.Checked) correctAnswer = "B";
-            else if (rbC.Checked && questionType != "true/false") correctAnswer = "C";
-            else if (rbD.Checked && questionType != "true/false") correctAnswer = "D";
+            else if (!isTrueFalse && rbC.Checked) correctAnswer = "C";
+            else if (!isTrueFalse && rbD.Checked) correctAnswer = "D";
             else
             {
                 MessageBox.Show("Please select the correct answer.");
                 return;
             }
 
-            // Create the question
+           
             Question q = new Question
             {
                 QuestionText = txtQuestion.Text.Trim(),
                 AnswerA = txtAnswerA.Text.Trim(),
                 AnswerB = txtAnswerB.Text.Trim(),
-                AnswerC = (questionType != "true/false") ? txtAnswerC.Text.Trim() : "",
-                AnswerD = (questionType != "true/false") ? txtAnswerD.Text.Trim() : "",
-                CorrectAnswer = correctAnswer.Trim(),
+                AnswerC = isTrueFalse ? "" : txtAnswerC.Text.Trim(),
+                AnswerD = isTrueFalse ? "" : txtAnswerD.Text.Trim(),
+                CorrectAnswer = correctAnswer,
                 Category = cmbCategory.Text.Trim(),
                 Difficulty = cmbDifficulty.Text.Trim(),
                 Type = cmbType.Text.Trim()
             };
 
             questions.Add(q);
-            SaveQuestionToExcel(q);  // 📝 Save to Excel!
-            MessageBox.Show("Question added successfully!");
+            SaveQuestionToExcel(q); 
 
-            ClearForm();
+            ClearForm(); 
         }
+
 
 
 
@@ -436,14 +432,9 @@ namespace Examineon
             MainForm mainForm = new MainForm();
             mainForm.Show();
             this.Hide();
+            
         }
 
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-          //  LecturerAnalysisForm analysisForm = new LecturerAnalysisForm();
-            //analysisForm.Show();
-            //this.Hide();
-  //      }
 
         private void btnExit_Click(object sender, EventArgs e)
         {

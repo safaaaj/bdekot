@@ -2,16 +2,19 @@
 {
     partial class PracticeExamForm
     {
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        private Label lblHeader;
+        private Label lblQuestionNumber;
+        private Label label1;
+        private RadioButton rbA;
+        private RadioButton rbB;
+        private RadioButton rbC;
+        private RadioButton rbD;
+        private Button btnNext;
+        private Button btnSubmit;
+        private Button btnBack;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,12 +26,11 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PracticeExamForm));
+            lblHeader = new Label();
+            lblQuestionNumber = new Label();
             label1 = new Label();
             rbA = new RadioButton();
             rbB = new RadioButton();
@@ -39,116 +41,159 @@
             btnBack = new Button();
             SuspendLayout();
             // 
+            // lblHeader
+            // 
+            lblHeader.AutoSize = true;
+            lblHeader.BackColor = Color.Transparent;
+            lblHeader.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblHeader.ForeColor = Color.LightYellow;
+            lblHeader.Location = new Point(64, 20);
+            lblHeader.Name = "lblHeader";
+            lblHeader.Size = new Size(0, 65);
+            lblHeader.TabIndex = 0;
+            // 
+            // lblQuestionNumber
+            // 
+            lblQuestionNumber.AutoSize = true;
+            lblQuestionNumber.BackColor = Color.Transparent;
+            lblQuestionNumber.Font = new Font("Segoe UI", 12F, FontStyle.Italic);
+            lblQuestionNumber.ForeColor = Color.SeaGreen;
+            lblQuestionNumber.Location = new Point(64, 75);
+            lblQuestionNumber.Name = "lblQuestionNumber";
+            lblQuestionNumber.Size = new Size(0, 45);
+            lblQuestionNumber.TabIndex = 1;
+            // 
             // label1
             // 
-            label1.Location = new Point(86, 54);
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Sylfaen", 12F);
+            label1.ForeColor = Color.PaleGoldenrod;
+            label1.Location = new Point(64, 226);
             label1.Name = "label1";
-            label1.Size = new Size(435, 40);
-            label1.TabIndex = 0;
-            label1.Click += label1_Click;
+            label1.Size = new Size(850, 60);
+            label1.TabIndex = 2;
             // 
             // rbA
             // 
             rbA.AutoSize = true;
-            rbA.Location = new Point(105, 127);
+            rbA.BackColor = Color.Transparent;
+            rbA.Font = new Font("Segoe UI", 11F);
+            rbA.ForeColor = Color.DarkSlateGray;
+            rbA.Location = new Point(90, 336);
             rbA.Name = "rbA";
-            rbA.Size = new Size(184, 36);
-            rbA.TabIndex = 1;
+            rbA.Size = new Size(27, 26);
+            rbA.TabIndex = 3;
             rbA.TabStop = true;
-            rbA.Text = "radioButton1";
-            rbA.UseVisualStyleBackColor = true;
+            rbA.UseVisualStyleBackColor = false;
             // 
             // rbB
             // 
             rbB.AutoSize = true;
-            rbB.Location = new Point(103, 169);
+            rbB.BackColor = Color.Transparent;
+            rbB.Font = new Font("Segoe UI", 11F);
+            rbB.ForeColor = Color.DarkSlateGray;
+            rbB.Location = new Point(90, 381);
             rbB.Name = "rbB";
-            rbB.Size = new Size(184, 36);
-            rbB.TabIndex = 2;
+            rbB.Size = new Size(27, 26);
+            rbB.TabIndex = 4;
             rbB.TabStop = true;
-            rbB.Text = "radioButton2";
-            rbB.UseVisualStyleBackColor = true;
+            rbB.UseVisualStyleBackColor = false;
             // 
             // rbC
             // 
             rbC.AutoSize = true;
-            rbC.Location = new Point(105, 226);
+            rbC.BackColor = Color.Transparent;
+            rbC.Font = new Font("Segoe UI", 11F);
+            rbC.ForeColor = Color.DarkSlateGray;
+            rbC.Location = new Point(90, 426);
             rbC.Name = "rbC";
-            rbC.Size = new Size(184, 36);
-            rbC.TabIndex = 3;
+            rbC.Size = new Size(27, 26);
+            rbC.TabIndex = 5;
             rbC.TabStop = true;
-            rbC.Text = "radioButton3";
-            rbC.UseVisualStyleBackColor = true;
+            rbC.UseVisualStyleBackColor = false;
             // 
             // rbD
             // 
             rbD.AutoSize = true;
-            rbD.Location = new Point(103, 277);
+            rbD.BackColor = Color.Transparent;
+            rbD.Font = new Font("Segoe UI", 11F);
+            rbD.ForeColor = Color.DarkSlateGray;
+            rbD.Location = new Point(90, 471);
             rbD.Name = "rbD";
-            rbD.Size = new Size(184, 36);
-            rbD.TabIndex = 4;
+            rbD.Size = new Size(27, 26);
+            rbD.TabIndex = 6;
             rbD.TabStop = true;
-            rbD.Text = "radioButton4";
-            rbD.UseVisualStyleBackColor = true;
+            rbD.UseVisualStyleBackColor = false;
             // 
             // btnNext
             // 
-            btnNext.Location = new Point(387, 258);
+            btnNext.BackColor = Color.Transparent;
+            btnNext.FlatAppearance.BorderSize = 0;
+            btnNext.FlatStyle = FlatStyle.Flat;
+            btnNext.Font = new Font("Sylfaen", 10F, FontStyle.Bold);
+            btnNext.ForeColor = Color.SeaGreen;
+            btnNext.Location = new Point(763, 400);
             btnNext.Name = "btnNext";
-            btnNext.Size = new Size(151, 57);
-            btnNext.TabIndex = 5;
-            btnNext.Text = "Next";
-            btnNext.UseVisualStyleBackColor = true;
+            btnNext.Size = new Size(151, 50);
+            btnNext.TabIndex = 7;
+            btnNext.Text = "➡️ Next";
+            btnNext.UseVisualStyleBackColor = false;
             btnNext.Click += btnNext_Click;
             // 
             // btnSubmit
             // 
-            btnSubmit.Location = new Point(387, 336);
+            btnSubmit.BackColor = Color.Transparent;
+            btnSubmit.FlatAppearance.BorderSize = 0;
+            btnSubmit.FlatStyle = FlatStyle.Flat;
+            btnSubmit.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnSubmit.ForeColor = Color.SeaGreen;
+            btnSubmit.Location = new Point(763, 470);
             btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new Size(151, 57);
-            btnSubmit.TabIndex = 6;
-            btnSubmit.Text = "Submit";
-            btnSubmit.UseVisualStyleBackColor = true;
+            btnSubmit.Size = new Size(151, 50);
+            btnSubmit.TabIndex = 8;
+            btnSubmit.Text = "✅ Submit";
+            btnSubmit.UseVisualStyleBackColor = false;
             btnSubmit.Click += btnSubmit_Click;
             // 
             // btnBack
             // 
-            btnBack.Location = new Point(64, 514);
+            btnBack.BackColor = Color.Transparent;
+            btnBack.FlatAppearance.BorderSize = 0;
+            btnBack.FlatStyle = FlatStyle.Flat;
+            btnBack.Font = new Font("Sylfaen", 10F);
+            btnBack.ForeColor = Color.SeaGreen;
+            btnBack.Location = new Point(12, 656);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(118, 49);
-            btnBack.TabIndex = 7;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Size = new Size(194, 101);
+            btnBack.TabIndex = 9;
+            btnBack.Text = "🔙 Back";
+            btnBack.UseVisualStyleBackColor = false;
             btnBack.Click += btnBack_Click;
             // 
             // PracticeExamForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1167, 819);
-            Controls.Add(btnBack);
+            BackgroundImage = Properties.Resources.ChatGPT_Image_Jun_7__2025__01_14_41_AM;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1242, 907);
+            Controls.Add(lblHeader);
+            Controls.Add(lblQuestionNumber);
             Controls.Add(label1);
-            Controls.Add(btnSubmit);
-            Controls.Add(btnNext);
-            Controls.Add(rbD);
-            Controls.Add(rbC);
-            Controls.Add(rbB);
             Controls.Add(rbA);
+            Controls.Add(rbB);
+            Controls.Add(rbC);
+            Controls.Add(rbD);
+            Controls.Add(btnNext);
+            Controls.Add(btnSubmit);
+            Controls.Add(btnBack);
+            DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PracticeExamForm";
-            Text = "PracticeExamForm";
+            Text = "Practice Exam";
             Load += PracticeExamForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private RadioButton rbA;
-        private RadioButton rbB;
-        private RadioButton rbC;
-        private RadioButton rbD;
-        private Button btnNext;
-        private Button btnSubmit;
-        private Label label1;
-        private Button btnBack;
     }
 }

@@ -41,7 +41,7 @@ namespace Examineon
             string selectedRole = comboBox1.Text.Trim().ToLower(); // "student" or "lecturer"
             string username = textBox1.Text.Trim();
             string password = textBox2.Text.Trim();
-           
+
 
             // ✅ Basic validation
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(selectedRole))
@@ -59,7 +59,7 @@ namespace Examineon
 
             bool isValidUser = false;
 
-            
+
             string studentId = "";
 
             using (var package = new ExcelPackage(file))
@@ -76,7 +76,7 @@ namespace Examineon
                     if (fileUser == username && filePass == password && fileRole == selectedRole)
                     {
                         isValidUser = true;
-                        studentId = ws.Cells[row, 3].Text.Trim(); 
+                        studentId = ws.Cells[row, 3].Text.Trim();
                     }
                 }
             }
@@ -110,9 +110,9 @@ namespace Examineon
             WelocmePage welcome = new WelocmePage();
             welcome.Show();
             this.Hide();
+           
         }
 
-
-
+        
     }
 }

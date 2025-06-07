@@ -41,50 +41,42 @@ namespace Examineon
             {
                 using (var package = new ExcelPackage(file))
                 {
-                    var ws = package.Workbook.Worksheets["Users"];
-                    if (ws != null)
+                    var ws = package.Workbook.Worksheets["StudentEH"];
+                    if (ws != null && ws.Dimension != null)
                     {
                         int rowCount = ws.Dimension.End.Row;
-                        int colCount = ws.Dimension.End.Column;
+
+                        var studentGroups = new Dictionary<string, List<double>>();
 
                         for (int row = 2; row <= rowCount; row++)
                         {
-                            string role = ws.Cells[row, 5].Text.Trim().ToLower();
-                            if (role == "student")
+                            string studentId = ws.Cells[row, 13].Text.Trim();
+                            string scoreStr = ws.Cells[row, 15].Text.Trim();
+
+                            if (double.TryParse(scoreStr, out double score))
                             {
-                                string name = ws.Cells[row, 1].Text.Trim();
-                                var grades = new List<double>();
+                                if (!studentGroups.ContainsKey(studentId))
+                                    studentGroups[studentId] = new List<double>();
 
-                                for (int col = 6; col <= colCount; col++)
-                                {
-                                    if (double.TryParse(ws.Cells[row, col].Text.Trim(), out double grade))
-                                    {
-                                        grades.Add(grade);
-                                    }
-                                }
-
-                                list.Add(new StudentRecord { Name = name, Grades = grades });
+                                studentGroups[studentId].Add(score);
                             }
+                        }
+
+                        foreach (var entry in studentGroups)
+                        {
+                            list.Add(new StudentRecord
+                            {
+                                Name = entry.Key, // 👈 هنا بنستخدم الـ ID كاسم مبدئي
+                                Grades = entry.Value
+                            });
                         }
                     }
                 }
             }
 
-            // If no students found, inject example data
-            if (list.Count == 0)
-            {
-                list = new List<StudentRecord>
-                {
-                    new StudentRecord { Name = "Alice Johnson", Grades = new List<double>{85, 90, 88} },
-                    new StudentRecord { Name = "Mohammed Saleh", Grades = new List<double>{92, 95, 93} },
-                    new StudentRecord { Name = "Sara Cohen", Grades = new List<double>{76, 80, 78} },
-                    new StudentRecord { Name = "Liam Smith", Grades = new List<double>{88, 85, 90} },
-                    new StudentRecord { Name = "Chen Wei", Grades = new List<double>{95, 97, 96} }
-                };
-            }
-
             return list;
         }
+
 
         private void DisplayStudents(List<StudentRecord> list)
         {
@@ -219,6 +211,7 @@ namespace Examineon
             MainForm mainForm = new MainForm("lecturer");
             mainForm.Show();
             this.Hide();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -234,6 +227,11 @@ namespace Examineon
         {
             public string Name { get; set; }
             public List<double> Grades { get; set; } = new List<double>();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -32,84 +32,121 @@
             btnCreateQ = new Button();
             btnTeacherPage = new Button();
             btnOpenAnalysis = new Button();
-            button1 = new Button();
-            button2 = new Button();
+            lblTitle = new Label();
+            lblSubtitle = new Label();
+            button3 = new Button();
             SuspendLayout();
             // 
             // btnCreateQ
             // 
-            btnCreateQ.Location = new Point(101, 293);
+            btnCreateQ.BackColor = Color.Transparent;
+            btnCreateQ.FlatStyle = FlatStyle.Flat;
+            btnCreateQ.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnCreateQ.ForeColor = Color.White;
+            btnCreateQ.Location = new Point(47, 257);
             btnCreateQ.Name = "btnCreateQ";
-            btnCreateQ.Size = new Size(327, 97);
-            btnCreateQ.TabIndex = 0;
-            btnCreateQ.Text = "create q";
-            btnCreateQ.UseVisualStyleBackColor = true;
+            btnCreateQ.Size = new Size(699, 206);
+            btnCreateQ.TabIndex = 2;
+            btnCreateQ.Text = "➕ Create Question";
+            btnCreateQ.UseVisualStyleBackColor = false;
             btnCreateQ.Click += btnCreateQ_Click;
             // 
             // btnTeacherPage
             // 
-            btnTeacherPage.ImeMode = ImeMode.NoControl;
-            btnTeacherPage.Location = new Point(101, 470);
+            btnTeacherPage.BackColor = Color.Transparent;
+            btnTeacherPage.FlatStyle = FlatStyle.Flat;
+            btnTeacherPage.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnTeacherPage.ForeColor = Color.White;
+            btnTeacherPage.Location = new Point(663, 495);
             btnTeacherPage.Name = "btnTeacherPage";
-            btnTeacherPage.Size = new Size(327, 97);
-            btnTeacherPage.TabIndex = 2;
-            btnTeacherPage.Text = "Create Exam";
-            btnTeacherPage.UseVisualStyleBackColor = true;
+            btnTeacherPage.Size = new Size(699, 206);
+            btnTeacherPage.TabIndex = 3;
+            btnTeacherPage.Text = "📝 Create Exam";
+            btnTeacherPage.UseVisualStyleBackColor = false;
+            btnTeacherPage.Click += btnTeacherPage_Click;
             // 
             // btnOpenAnalysis
             // 
-            btnOpenAnalysis.Location = new Point(124, 652);
+            btnOpenAnalysis.BackColor = Color.Transparent;
+            btnOpenAnalysis.FlatStyle = FlatStyle.Flat;
+            btnOpenAnalysis.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            btnOpenAnalysis.ForeColor = Color.White;
+            btnOpenAnalysis.Location = new Point(258, 743);
             btnOpenAnalysis.Name = "btnOpenAnalysis";
-            btnOpenAnalysis.Size = new Size(327, 97);
-            btnOpenAnalysis.TabIndex = 0;
-            btnOpenAnalysis.Text = "Open Student Analysis";
-            btnOpenAnalysis.UseVisualStyleBackColor = true;
+            btnOpenAnalysis.Size = new Size(699, 206);
+            btnOpenAnalysis.TabIndex = 4;
+            btnOpenAnalysis.Text = "📊 Open Student Analysis";
+            btnOpenAnalysis.UseVisualStyleBackColor = false;
             btnOpenAnalysis.Click += btnOpenAnalysis_Click;
             // 
-            // button1
+            // lblTitle
             // 
-            button1.Location = new Point(51, 877);
-            button1.Name = "button1";
-            button1.Size = new Size(88, 43);
-            button1.TabIndex = 3;
-            button1.Text = "<--";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            lblTitle.AutoSize = true;
+            lblTitle.BackColor = Color.Transparent;
+            lblTitle.Font = new Font("Segoe UI", 26F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.DarkSlateGray;
+            lblTitle.Location = new Point(329, 48);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(796, 93);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "📚 Lecturer Dashboard";
             // 
-            // button2
+            // lblSubtitle
             // 
-            button2.Location = new Point(145, 877);
-            button2.Name = "button2";
-            button2.Size = new Size(88, 43);
-            button2.TabIndex = 4;
-            button2.Text = "-->";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            lblSubtitle.AutoSize = true;
+            lblSubtitle.BackColor = Color.Transparent;
+            lblSubtitle.Font = new Font("Segoe UI", 14F, FontStyle.Italic);
+            lblSubtitle.ForeColor = Color.Black;
+            lblSubtitle.Location = new Point(452, 165);
+            lblSubtitle.Name = "lblSubtitle";
+            lblSubtitle.Size = new Size(594, 51);
+            lblSubtitle.TabIndex = 1;
+            lblSubtitle.Text = "Welcome! Choose an action below.";
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.Transparent;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.ForeColor = Color.Black;
+            button3.Location = new Point(74, 915);
+            button3.Name = "button3";
+            button3.Size = new Size(103, 72);
+            button3.TabIndex = 13;
+            button3.Text = "←";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(18F, 45F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1193, 998);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            BackColor = Color.WhiteSmoke;
+            BackgroundImage = Properties.Resources.main;
+            ClientSize = new Size(1529, 1011);
+            Controls.Add(button3);
+            Controls.Add(lblTitle);
+            Controls.Add(lblSubtitle);
             Controls.Add(btnCreateQ);
             Controls.Add(btnTeacherPage);
             Controls.Add(btnOpenAnalysis);
+            Font = new Font("Segoe UI", 12F);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "MainForm";
+            Text = "Lecturer Dashboard";
             Load += MainForm_Load_2;
             ResumeLayout(false);
-
+            PerformLayout();
         }
+
 
         #endregion
 
         private System.Windows.Forms.Button btnOpenAnalysis;
         private Button btnCreateQ;
         private Button btnTeacherPage;
-        private Button button1;
-        private Button button2;
+        private Label lblTitle;
+        private Label lblSubtitle;
+        private Button button3;
     }
 }

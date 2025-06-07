@@ -22,6 +22,7 @@ namespace Examineon
         public MainForm(string role)
         {
             InitializeComponent();
+
             userRole = role;
 
 
@@ -40,7 +41,7 @@ namespace Examineon
         {
 
             Form1 form1 = new Form1();
-            form1.ShowDialog();// or use .Show() if you want it modeless
+            form1.Show();// or use .Show() if you want it modeless
         }
 
 
@@ -67,7 +68,7 @@ namespace Examineon
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
                 "Where do you want to go?\nYes = Login\nNo = Sign Up",
@@ -90,20 +91,7 @@ namespace Examineon
             // If Cancel, do nothing
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (userRole == "lecturer")
-            {
-                CreateExam createExamForm = new CreateExam();
-                createExamForm.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("You don’t have access to the lecturer page.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
+       
     }
 
 }

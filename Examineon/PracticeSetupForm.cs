@@ -12,8 +12,10 @@ namespace Examineon
 {
     public partial class PracticeSetupForm : Form
     {
+        private string studentId; private string role;
         public PracticeSetupForm()
         {
+            
             InitializeComponent();
             cmbPracticeSubject.Items.AddRange(new string[] { "English", "Math", "Hebrew" });
             cmbPracticeDifficulty.Items.AddRange(new string[] { "Easy", "Medium", "Hard" });
@@ -21,7 +23,7 @@ namespace Examineon
             cmbPracticeSubject.SelectedIndex = 0;
             cmbPracticeDifficulty.SelectedIndex = 0;
 
-            btnStartPractice.Click += btnStartPractice_Click;
+
             btnExit.Click += btnExit_Click;
 
             CreateDummyExamSheet();
@@ -133,6 +135,14 @@ namespace Examineon
             Application.Exit();
         }
 
-        
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            SecondaryForm secondaryForm = new SecondaryForm(role, studentId);
+            secondaryForm.Show();
+            this.Show();
+            this.Hide();
+
+            
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Examineon
 {
     public partial class TestForm : Form
     {
+        string role = "student";
         private List<Question> questions = new List<Question>();
         private int currentQuestionIndex = 0;
         private int correctCount = 0;
@@ -126,7 +127,7 @@ namespace Examineon
                    rbD.Checked ? "D" : "";
         }
 
-        private void btnNext_Click_1(object sender, EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
             if (currentQuestionIndex >= questions.Count - 1)
             {
@@ -180,7 +181,10 @@ namespace Examineon
             MessageBox.Show($"Exam finished!\nScore: {percentage:F2}% ({correctCount}/{questions.Count})");
 
             SaveResultToExcel(percentage);
-            this.Close();
+            SecondaryForm secondaryForm = new SecondaryForm(role,studentId);
+            secondaryForm.Show();
+            this.Hide();
+
         }
 
         private void SaveResultToExcel(double score)
@@ -191,42 +195,61 @@ namespace Examineon
             {
                 var ws = package.Workbook.Worksheets["StudentEH"];
                 if (ws == null)
+                {
                     ws = package.Workbook.Worksheets.Add("StudentEH");
 
-                int row = ws.Dimension?.End.Row + 1 ?? 2;
-                DateTime now = DateTime.Now;
-
-                string subject = questions[0].Category;
-                string difficulty = questions[0].Difficulty;
-
-                string studentAnswers = "";
-                for (int i = 0; i < questions.Count; i++)
-                {
-                    string answer = selectedAnswers.ContainsKey(i) ? selectedAnswers[i] : "-";
-                    studentAnswers += $"Q{i + 1}:{answer}, ";
+                    // Headers (only added if new sheet)
+                    ws.Cells[1, 1].Value = "ExamID";
+                    ws.Cells[1, 2].Value = "CreatedAt";
+                    ws.Cells[1, 3].Value = "NumberOfQuestions";
+                    ws.Cells[1, 4].Value = "QuestionText";
+                    ws.Cells[1, 5].Value = "AnswerA";
+                    ws.Cells[1, 6].Value = "AnswerB";
+                    ws.Cells[1, 7].Value = "AnswerC";
+                    ws.Cells[1, 8].Value = "AnswerD";
+                    ws.Cells[1, 9].Value = "CorrectAnswer";
+                    ws.Cells[1, 10].Value = "Category";
+                    ws.Cells[1, 11].Value = "Difficulty";
+                    ws.Cells[1, 12].Value = "Type";
+                    ws.Cells[1, 13].Value = "StudentID";
+                    ws.Cells[1, 14].Value = "StudentAnswers";
+                    ws.Cells[1, 15].Value = "Score";
                 }
 
-                ws.Cells[row, 1].Value = examId;
-                ws.Cells[row, 2].Value = now.ToShortDateString();
-                ws.Cells[row, 3].Value = questions.Count;
-                ws.Cells[row, 4].Value = questions[0].QuestionText;
-                ws.Cells[row, 5].Value = "";
-                ws.Cells[row, 6].Value = "";
-                ws.Cells[row, 7].Value = "";
-                ws.Cells[row, 8].Value = "";
-                ws.Cells[row, 9].Value = "";
-                ws.Cells[row, 10].Value = subject;
-                ws.Cells[row, 11].Value = difficulty;
-                ws.Cells[row, 12].Value = "exam";
-                ws.Cells[row, 13].Value = studentId;
-                ws.Cells[row, 14].Value = studentAnswers.TrimEnd(',', ' ');
-                ws.Cells[row, 15].Value = score;
+                int row = ws.Dimension?.End.Row + 1 ?? 2;
+                string createdAt = DateTime.Now.ToShortDateString();
+
+                for (int i = 0; i < questions.Count; i++)
+                {
+                    var q = questions[i];
+                    string studentAnswer = selectedAnswers.ContainsKey(i) ? selectedAnswers[i] : "-";
+
+                    ws.Cells[row, 1].Value = examId;
+                    ws.Cells[row, 2].Value = createdAt;
+                    ws.Cells[row, 3].Value = questions.Count;
+                    ws.Cells[row, 4].Value = q.QuestionText;
+                    ws.Cells[row, 5].Value = q.AnswerA;
+                    ws.Cells[row, 6].Value = q.AnswerB;
+                    ws.Cells[row, 7].Value = q.AnswerC;
+                    ws.Cells[row, 8].Value = q.AnswerD;
+                    ws.Cells[row, 9].Value = q.CorrectAnswer;
+                    ws.Cells[row, 10].Value = q.Category;
+                    ws.Cells[row, 11].Value = q.Difficulty;
+                    ws.Cells[row, 12].Value = "exam";
+                    ws.Cells[row, 13].Value = studentId;
+                    ws.Cells[row, 14].Value = $"Q{i + 1}:{studentAnswer}";
+                    ws.Cells[row, 15].Value = score;
+
+                    row++;
+                }
 
                 package.Save();
-                MessageBox.Show("studentId = " + studentId); // ✅
 
+                string fullPath = Path.GetFullPath(file.FullName);
+                MessageBox.Show($"✅ Exam data saved to:\n{fullPath}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
         private void FinishExam()
         {
@@ -237,6 +260,26 @@ namespace Examineon
         private void rbA_CheckedChanged(object sender, EventArgs e) { }
 
         private void TestForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblProgress_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbD_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbC_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbB_CheckedChanged(object sender, EventArgs e)
         {
 
         }

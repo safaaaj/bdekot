@@ -39,76 +39,94 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Trebuchet MS", 25.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(294, 273);
+            label1.Font = new Font("Segoe UI", 30F, FontStyle.Bold);
+            label1.ForeColor = Color.FromArgb(34, 139, 34);
+            label1.Location = new Point(503, 402);
             label1.Name = "label1";
-            label1.Size = new Size(411, 86);
-            label1.TabIndex = 0;
+            label1.Size = new Size(530, 106);
+            label1.TabIndex = 5;
             label1.Text = "EXAMINEON";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Yu Gothic UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(358, 374);
+            label2.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            label2.ForeColor = Color.DarkOliveGreen;
+            label2.Location = new Point(551, 539);
             label2.Name = "label2";
-            label2.Size = new Size(270, 32);
-            label2.TabIndex = 1;
+            label2.Size = new Size(443, 51);
+            label2.TabIndex = 4;
             label2.Text = "Welcome to Examineon";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Yu Gothic UI", 7.875F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(172, 406);
+            label3.Font = new Font("Segoe UI", 10F, FontStyle.Italic);
+            label3.ForeColor = Color.FromArgb(60, 80, 60);
+            label3.Location = new Point(393, 637);
             label3.Name = "label3";
-            label3.Size = new Size(633, 30);
-            label3.TabIndex = 2;
-            label3.Text = "your smart platform for managing exams and practice questions";
+            label3.Size = new Size(770, 37);
+            label3.TabIndex = 3;
+            label3.Text = "Your smart platform for managing exams and practice questions";
             // 
             // button1
             // 
-            button1.Font = new Font("Trebuchet MS", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(114, 526);
+            button1.BackColor = Color.FromArgb(46, 139, 87);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(432, 742);
             button1.Name = "button1";
-            button1.Size = new Size(299, 72);
-            button1.TabIndex = 3;
-            button1.Text = "login";
-            button1.UseVisualStyleBackColor = true;
+            button1.Size = new Size(240, 60);
+            button1.TabIndex = 2;
+            button1.Text = "Login";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Font = new Font("Trebuchet MS", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(507, 532);
+            button2.BackColor = Color.SeaGreen;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(841, 742);
             button2.Name = "button2";
-            button2.Size = new Size(311, 66);
-            button2.TabIndex = 4;
-            button2.Text = "SignUp";
-            button2.UseVisualStyleBackColor = true;
+            button2.Size = new Size(240, 60);
+            button2.TabIndex = 1;
+            button2.Text = "Sign Up";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // WelocmePage
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(960, 982);
+            BackColor = Color.Beige;
+            BackgroundImage = Properties.Resources.welcome;
+            ClientSize = new Size(1537, 1025);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "WelocmePage";
-            Text = "WelocmePage";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Welcome to Examineon";
+            Load += WelocmePage_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
+
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Button button1;
-        private Button button2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+
     }
 }

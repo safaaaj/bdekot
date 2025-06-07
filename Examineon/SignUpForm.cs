@@ -139,11 +139,16 @@ namespace Examineon
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             WelocmePage welcome = new WelocmePage();
             welcome.Show();
-            this.Hide();
+            this.Hide(); 
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

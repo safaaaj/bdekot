@@ -8,8 +8,8 @@ namespace Examineon
         public WelocmePage()
         {
             InitializeComponent();
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+           // this.button1.Click += new System.EventHandler(this.button1_Click);
+           // this.button2.Click += new System.EventHandler(this.button2_Click);
             button1.UseVisualStyleBackColor = true;
             button2.UseVisualStyleBackColor = true;
 
@@ -17,17 +17,27 @@ namespace Examineon
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             LoginForm login = new LoginForm();
             login.Show();
             this.Hide();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            button2.Enabled = false;
             SignUpForm signup = new SignUpForm();
             signup.Show();
             this.Hide();
+            
         }
 
+        private void WelocmePage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }

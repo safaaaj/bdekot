@@ -344,14 +344,10 @@ namespace Examineon
             MainForm mainForm = new MainForm("lecturer");
             mainForm.Show();
             this.Hide();
+            
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form1 createQuestion = new Form1();
-            createQuestion.Show();
-            this.Hide();
-        }
+
 
         public class Question
         {
@@ -370,5 +366,17 @@ namespace Examineon
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }
