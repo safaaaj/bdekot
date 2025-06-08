@@ -122,7 +122,7 @@
             AutoScaleDimensions = new SizeF(18F, 45F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            BackgroundImage = Properties.Resources.main;
+          //  BackgroundImage = Properties.Resources.main;
             ClientSize = new Size(1529, 1011);
             Controls.Add(button3);
             Controls.Add(lblTitle);
