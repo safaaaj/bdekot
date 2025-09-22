@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -12,7 +12,6 @@ namespace Examineon
 {
     public partial class StudentScoresForm : Form
     {
-
         private string studentId;
         private string role;
 
@@ -24,11 +23,11 @@ namespace Examineon
             InitializeComponent();
             this.studentId = studentId;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             cmbFilterSubject.SelectedIndexChanged += (s, e) =>
             {
                 ApplySubjectFilter(cmbFilterSubject.SelectedItem?.ToString() ?? "All");
             };
-            LoadStudentScores();
         }
 
         private void LoadStudentScores()
@@ -130,17 +129,23 @@ namespace Examineon
             }
         }
 
+        // Load event → reloads scores whenever the form opens
         private void StudentScoresForm_Load(object sender, EventArgs e)
         {
+            LoadStudentScores();
+        }
 
+        // Refresh button → reloads scores on demand
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadStudentScores();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             SecondaryForm secondaryForm = new SecondaryForm(role, studentId);
             secondaryForm.Show();
-            this.Show(); this.Hide();
-            
+            this.Hide(); // fixed: hide this form instead of re-showing
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -149,3 +154,4 @@ namespace Examineon
         }
     }
 }
+
