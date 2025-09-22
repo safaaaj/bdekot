@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OfficeOpenXml;
 using System.IO;
 
+
 namespace Examineon
 {
     public partial class LoginForm : Form
@@ -41,6 +42,7 @@ namespace Examineon
             string username = textBox1.Text.Trim();
             string password = textBox2.Text.Trim();
 
+
             // ✅ Basic validation
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(selectedRole))
             {
@@ -48,7 +50,7 @@ namespace Examineon
                 return;
             }
 
-            var file = new FileInfo("USERS.xlsx");
+            var file = new FileInfo("DATABASE.xlsx");
             if (!file.Exists)
             {
                 MessageBox.Show("User database not found.");
@@ -56,6 +58,9 @@ namespace Examineon
             }
 
             bool isValidUser = false;
+
+
+            string studentId = "";
 
             using (var package = new ExcelPackage(file))
             {
@@ -71,24 +76,25 @@ namespace Examineon
                     if (fileUser == username && filePass == password && fileRole == selectedRole)
                     {
                         isValidUser = true;
-                        break;
+                        studentId = ws.Cells[row, 3].Text.Trim();
                     }
                 }
             }
+
 
             if (isValidUser)
             {
                 MessageBox.Show($"Welcome {username}! You are logged in as a {selectedRole}.");
 
-                
+
                 if (selectedRole == "lecturer")
                 {
-                    MainForm main = new MainForm(selectedRole); 
+                    MainForm main = new MainForm(selectedRole);
                     main.Show();
                 }
                 else if (selectedRole == "student")
                 {
-                    SecondaryForm secondary = new SecondaryForm(selectedRole); 
+                    SecondaryForm secondary = new SecondaryForm(selectedRole, studentId);
                     secondary.Show();
                 }
 
@@ -99,5 +105,14 @@ namespace Examineon
                 MessageBox.Show("Invalid username, password, or role.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            WelocmePage welcome = new WelocmePage();
+            welcome.Show();
+            this.Hide();
+           
+        }
+
+        
     }
 }
